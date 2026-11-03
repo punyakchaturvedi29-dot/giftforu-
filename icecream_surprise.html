@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A Little Surprise For You 🍦</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+  :root { --pink:#ff77ad; --purple:#9b78ff; --yellow:#ffe27a; --ink:#4c3159; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; font-family:'Poppins',sans-serif; color:var(--ink); overflow:hidden;
+    background: radial-gradient(circle at 12% 18%,#fff1b8 0 8%,transparent 9%), radial-gradient(circle at 88% 15%,#ffd5e8 0 10%,transparent 11%), linear-gradient(135deg,#ffe4ef,#e9e0ff 52%,#d9f8ff); }
+  .sparkles { position:fixed; inset:0; pointer-events:none; overflow:hidden; }
+  .sparkles span { position:absolute; font-size:clamp(18px,3vw,34px); animation:float 6s ease-in-out infinite; opacity:.75; }
+  .sparkles span:nth-child(1){left:8%;top:12%}.sparkles span:nth-child(2){right:9%;top:24%;animation-delay:1s}.sparkles span:nth-child(3){left:14%;bottom:15%;animation-delay:2s}.sparkles span:nth-child(4){right:15%;bottom:12%;animation-delay:1.5s}.sparkles span:nth-child(5){left:48%;top:7%;animation-delay:.5s}
+  @keyframes float { 0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-18px) rotate(10deg)} }
+  .wrap { min-height:100vh; display:grid; place-items:center; padding:22px; position:relative; }
+  .card { width:min(540px,100%); min-height:560px; background:rgba(255,255,255,.83); border:3px solid rgba(255,255,255,.9); border-radius:34px; box-shadow:0 24px 70px #865a9c2b; padding:38px 28px; text-align:center; position:relative; overflow:hidden; backdrop-filter:blur(12px); }
+  .card:before,.card:after {content:'';position:absolute;width:150px;height:150px;border-radius:50%;filter:blur(2px);opacity:.25;z-index:0}.card:before{background:#ff9fc9;left:-70px;top:-70px}.card:after{background:#9ddfff;right:-70px;bottom:-70px}
+  .content { position:relative;z-index:1; }
+  .eyebrow { display:inline-block; padding:8px 15px; border-radius:99px; background:#fff0f7; color:#d44d8b; font-size:12px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; }
+  h1 { font-family:'Baloo 2',cursive; font-size:clamp(38px,8vw,58px); line-height:1.03; margin:18px 0 8px; color:#df5798; }
+  .sub { font-size:16px; line-height:1.7; margin:0 auto; max-width:390px; color:#765c83; }
+  .icecream { width:190px;height:190px;margin:18px auto 12px;display:grid;place-items:center;position:relative; }
+  .icecream .scoop { width:132px;height:118px;border-radius:55% 55% 44% 44%;background:radial-gradient(circle at 35% 28%,#fff 0 8%,transparent 9%),linear-gradient(145deg,#ffb6d4,#ff78ae 65%,#ef5c9b);position:absolute;top:12px;box-shadow:inset -9px -9px 0 #e9579670; }
+  .icecream .scoop:before {content:'♡';position:absolute;left:43px;top:31px;color:#fff;font-size:36px;transform:rotate(-12deg)}
+  .icecream .cone {position:absolute;top:105px;width:0;height:0;border-left:57px solid transparent;border-right:57px solid transparent;border-top:90px solid #d99a55;filter:drop-shadow(4px 5px 0 #b9783e55)}
+  .icecream .cone:after {content:'';position:absolute;left:-42px;top:-75px;width:84px;height:68px;background:repeating-linear-gradient(45deg,transparent 0 12px,#b9783e88 13px 15px),repeating-linear-gradient(-45deg,transparent 0 12px,#b9783e88 13px 15px);clip-path:polygon(0 0,100% 0,50% 100%)}
+  .buttons { display:flex;justify-content:center;gap:16px;align-items:center;margin-top:25px;min-height:58px; }
+  button {border:0;border-radius:999px;padding:14px 29px;font-family:inherit;font-weight:800;font-size:16px;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 18px #d47aa444}
+  button:hover {transform:translateY(-3px)}
+  .yes {background:linear-gradient(135deg,#ff6da8,#ff91bd);color:white;min-width:125px}
+  .no {background:#eee8ff;color:#8264c4;min-width:105px;position:relative;z-index:5}
+  .tiny {font-size:12px;color:#a28eac;margin-top:20px}
+  .hidden {display:none!important}
+  .yay {font-size:70px;margin:20px 0 4px;animation:bounce 1s infinite alternate}
+  @keyframes bounce {to{transform:translateY(-10px) rotate(5deg)}}
+  .love-btn {margin-top:25px;background:linear-gradient(135deg,#9b78ff,#c28aff);color:white;padding:16px 26px}
+  .hearts {font-size:27px;letter-spacing:7px;margin:18px 0}
+  .monster-stage {height:245px;display:grid;place-items:center;margin:12px 0 0;}
+  /* CSS can illustration: intentionally self-contained so the surprise works without an image host */
+  .can {height:220px;width:104px;border-radius:20px 20px 25px 25px;position:relative;background:linear-gradient(90deg,#c9cdd2,#fff 18%,#f4f5f6 65%,#c9cdd2);box-shadow:14px 18px 24px #6d527c38;transform:rotate(-5deg);border:1px solid #c5c8cc;}
+  .can:before {content:'';position:absolute;top:-8px;left:8px;width:86px;height:13px;border-radius:50%;background:linear-gradient(#aeb4bb,#f8f8f8 45%,#aeb4bb);border:1px solid #aeb4bb}
+  .can:after {content:'';position:absolute;bottom:-5px;left:9px;width:84px;height:10px;border-radius:50%;background:#b9bec4}
+  .can-top {position:absolute;top:12px;left:0;width:100%;font-size:8px;font-weight:800;letter-spacing:2px;color:#4e555b}
+  .claw {position:absolute;top:48px;left:18px;font-family:Arial,sans-serif;font-weight:900;font-size:60px;line-height:1;color:#20252b;transform:scaleX(.8) rotate(-8deg);text-shadow:2px 1px #777}
+  .brand {position:absolute;top:118px;left:0;width:100%;font-size:12px;letter-spacing:1.5px;font-weight:900;color:#333}
+  .ultra {position:absolute;top:139px;left:0;width:100%;font-family:'Baloo 2';font-size:27px;font-weight:800;color:#333;letter-spacing:1px}
+  .zero {position:absolute;bottom:17px;left:0;width:100%;font-size:7px;letter-spacing:1.5px;color:#333;font-weight:800}
+  .note {font-size:12px;color:#9b88a5;margin-top:8px}
+  .back {background:#fff0f7;color:#d44d8b;margin-top:15px;padding:10px 20px;font-size:13px}
+  @media(max-width:430px){.card{padding:30px 18px;min-height:540px}.sub{font-size:14px}.icecream{transform:scale(.9);margin:5px auto}.buttons{gap:10px}}
+</style>
+</head>
+<body>
+<div class="sparkles" aria-hidden="true"><span>✨</span><span>💗</span><span>⭐</span><span>🍒</span><span>💕</span></div>
+<main class="wrap">
+  <section class="card" id="welcome">
+    <div class="content">
+      <span class="eyebrow">A tiny surprise for you</span>
+      <h1>Heyyy, you! 💗</h1>
+      <p class="sub">I have a very important question…<br><strong>I hope you like ice cream!</strong></p>
+      <div class="icecream" aria-label="Illustration of a pink ice cream cone"><div class="scoop"></div><div class="cone"></div></div>
+      <p class="sub">So, do you accept this sweet little treat?</p>
+      <div class="buttons"><button class="yes" id="yesBtn">YES! 🍦</button><button class="no" id="noBtn">NO 🙈</button></div>
+      <p class="tiny">Psst… choose wisely 😌</p>
+    </div>
+  </section>
+
+  <section class="card hidden" id="happy">
+    <div class="content">
+      <span class="eyebrow">Correct answer detected</span>
+      <div class="yay">🥳</div>
+      <h1>YAYYYYY!</h1>
+      <p class="sub">I knew you'd say yes! You just made someone very happy. 💞</p>
+      <div class="hearts">💗 💖 💗</div>
+      <p class="sub">If you want to send a little love to the person who sent you this ice cream…</p>
+      <button class="love-btn" id="loveBtn">SEND SOME LOVE 💌</button>
+      <p class="tiny">There's one more surprise waiting for you…</p>
+    </div>
+  </section>
+
+  <section class="card hidden" id="surprise">
+    <div class="content">
+      <span class="eyebrow">A little something for you</span>
+      <h1 style="color:#777f8a">Surprise! 🤍</h1>
+      <p class="sub">Because you deserve something cool.</p>
+      <div class="monster-stage" role="img" aria-label="Illustration of a white Monster Ultra energy drink can">
+        <div class="can"><div class="can-top">ENERGY DRINK</div><div class="claw">爪</div><div class="brand">MONSTER</div><div class="ultra">ULTRA</div><div class="zero">ZERO SUGAR · ZERO CALORIES</div></div>
+      </div>
+      <h2 style="font-family:'Baloo 2';font-size:27px;margin:0;color:#59616c">A WHITE MONSTER FOR YOU! 🤍</h2>
+      <p class="note">The iconic White Monster — Monster Energy Ultra Zero Ultra.</p>
+      <button class="back" id="againBtn">Replay the surprise ↻</button>
+    </div>
+  </section>
+</main>
+<script>
+  const welcome = document.getElementById('welcome');
+  const happy = document.getElementById('happy');
+  const surprise = document.getElementById('surprise');
+  const noBtn = document.getElementById('noBtn');
+  const yesBtn = document.getElementById('yesBtn');
+  const loveBtn = document.getElementById('loveBtn');
+  let noMoves = 0;
+
+  function show(section) {
+    [welcome, happy, surprise].forEach(s => s.classList.add('hidden'));
+    section.classList.remove('hidden');
+  }
+  yesBtn.addEventListener('click', () => show(happy));
+  loveBtn.addEventListener('click', () => show(surprise));
+  document.getElementById('againBtn').addEventListener('click', () => { noMoves = 0; noBtn.style.transform=''; noBtn.style.position='relative'; noBtn.style.left='0'; noBtn.style.top='0'; show(welcome); });
+
+  function runAway(event) {
+    event.preventDefault();
+    noMoves++;
+    const card = welcome.getBoundingClientRect();
+    const btn = noBtn.getBoundingClientRect();
+    const maxX = Math.max(20, card.width - btn.width - 35);
+    const maxY = Math.max(20, card.height - btn.height - 35);
+    const x = 15 + Math.random() * (maxX - 15);
+    const y = 20 + Math.random() * (maxY - 20);
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+    noBtn.style.transform = `rotate(${Math.random()*24-12}deg)`;
+    if (noMoves > 4) noBtn.textContent = ['NO 🙈','too slow! 😝','try again 😂','nope! 💨'][noMoves % 4];
+  }
+  noBtn.addEventListener('mouseenter', runAway);
+  noBtn.addEventListener('touchstart', runAway, {passive:false});
+  noBtn.addEventListener('click', runAway);
+</script>
+</body>
+</html>
